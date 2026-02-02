@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EduInfo TN | Tamil Nadu Education Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EduInfo TN provides Tamil Nadu Board, CBSE, exam results and education updates.">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    header {
+      background-color: #1e293b;
+      color: white;
+      padding: 16px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    nav {
+      margin-top: 8px;
+    }
+
+    nav a {
+      color: #c7d2fe;
+      margin-right: 14px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    article {
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    article:last-child {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    footer {
+      background: #1e293b;
+      color: #c7d2fe;
+      text-align: center;
+      padding: 14px;
+      margin-top: 40px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>EduInfo TN</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">TN Board</a>
+    <a href="#">CBSE</a>
+    <a href="#">Results</a>
+    <a href="#">Admissions</a>
+  </nav>
+</header>
+
+<div class="container">
+  <main class="card" id="news">
+    <article>
+      <span class="tag">Welcome</span>
+      <h2>EduInfo TN is Live</h2>
+      <p>EduInfo TN provides verified education information including Tamil Nadu Board updates, CBSE notices, exam results, and admissions.</p>
+    </article>
+  </main>
+
+  <aside class="card">
+    <h3>We Cover</h3>
+    <ul>
+      <li>Tamil Nadu State Board</li>
+      <li>Samacheer Kalvi</li>
+      <li>CBSE</li>
+      <li>Exam Results</li>
+      <li>College Admissions</li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2026 EduInfo TN | Education Information Portal
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const updates = [
+    {
+      tag: "TN Board",
+      title: "Tamil Nadu Board Exam Notification",
+      text: "Directorate of Government Examinations has released new exam-related updates."
+    },
+    {
+      tag: "CBSE",
+      title: "CBSE Circular Released",
+      text: "CBSE has issued an official circular regarding board examinations."
+    },
+    {
+      tag: "Admissions",
+      title: "College Admissions Open",
+      text: "Various colleges have opened their admission portals for the academic year."
+    }
+  ];
+
+  const container = document.getElementById("news");
+
+  updates.forEach(item => {
+    const article = document.createElement("article");
+    article.innerHTML = `
+      <span class="tag">${item.tag}</span>
+      <h2>${item.title}</h2>
+      <p>${item.text}</p>
+    `;
+    container.appendChild(article);
+  });
+});
+</script>
+
+</body>
+</html>
