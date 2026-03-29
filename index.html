@@ -2,59 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="google-site-verification" content="ns1DCQuBWwSoUUhUj0npJ1ePKIk3pOQDlBKLlKTQRcM" />
 
-<title>EduInfo TN | Education News & Games</title>
+<title>EduInfo TN | Modern Education Portal</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EduInfo TN provides Tamil Nadu Board, CBSE, and competitive exam updates plus student games.">
-
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://saadsmart2008-website.github.io/eduinfo-tn/">
+<meta name="description" content="EduInfo TN - TN Board, CBSE, Competitive Exams, Live News & Games">
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#f3f4f6;
-color:#111827;
+background:#f1f5f9;
 }
 
 header{
-background:#1e293b;
+background:linear-gradient(90deg,#1e293b,#2563eb);
 color:white;
-padding:18px;
+padding:20px;
+text-align:center;
 }
-
-header h1{margin:0}
-header p{margin:4px 0;color:#c7d2fe}
 
 .container{
-max-width:1100px;
-margin:24px auto;
-padding:0 16px;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
-.section{
-margin-bottom:32px;
-}
-
-.section h2{
-color:#1e293b;
-margin-bottom:12px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
 }
 
 .card{
 background:white;
 padding:16px;
-border-radius:10px;
-box-shadow:0 4px 12px rgba(0,0,0,.1);
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,.1);
+}
+
+h2{
+margin-top:0;
 }
 
 article{
-border-bottom:1px solid #e5e7eb;
-padding:12px 0;
+border-bottom:1px solid #eee;
+padding:10px 0;
 }
 
 article:last-child{
@@ -63,14 +57,13 @@ border:none;
 
 .tag{
 background:#e0e7ff;
-color:#3730a3;
-padding:3px 6px;
+padding:4px 8px;
 font-size:12px;
 border-radius:5px;
 }
 
 button{
-padding:10px 18px;
+padding:10px;
 background:#2563eb;
 color:white;
 border:none;
@@ -82,12 +75,18 @@ button:hover{
 background:#1d4ed8;
 }
 
+iframe{
+width:100%;
+border:none;
+border-radius:10px;
+}
+
 footer{
-background:#1e293b;
-color:#c7d2fe;
 text-align:center;
-padding:14px;
-margin-top:40px;
+padding:20px;
+background:#1e293b;
+color:white;
+margin-top:30px;
 }
 </style>
 </head>
@@ -96,116 +95,100 @@ margin-top:40px;
 
 <header>
 <h1>EduInfo TN</h1>
-<p>Tamil Nadu Board • CBSE • Competitive Exams • Student Games</p>
+<p>TN Board • CBSE • Competitive Exams • Games</p>
 </header>
 
 <div class="container">
 
-<!-- TN BOARD NEWS -->
-<div class="section">
-<h2>📘 Tamil Nadu Education Updates</h2>
-<div class="card" id="tn-news">
-Loading TN updates...
-</div>
-</div>
+<div class="grid">
 
-<!-- CBSE NEWS -->
-<div class="section">
-<h2>📗 CBSE Education Updates</h2>
-<div class="card" id="cbse-news">
-Loading CBSE updates...
-</div>
-</div>
-
-<!-- COMPETITIVE EXAMS -->
-<div class="section">
-<h2>🎓 Competitive Exam News</h2>
-<div class="card" id="exam-news">
-Loading exam updates...
-</div>
-</div>
-
-<!-- GAMES SECTION -->
-<div class="section">
-<h2>🎮 Student Games</h2>
+<!-- TN NEWS -->
 <div class="card">
+<h2>📘 TN Education</h2>
+<div id="tn-news">Loading...</div>
+</div>
 
-<h3>Click Score Game</h3>
+<!-- CBSE -->
+<div class="card">
+<h2>📗 CBSE News</h2>
+<div id="cbse-news">Loading...</div>
+</div>
+
+<!-- COMPETITIVE -->
+<div class="card">
+<h2>🎓 Competitive Exams</h2>
+<div id="exam-news">Loading...</div>
+</div>
+
+<!-- GAME -->
+<div class="card">
+<h2>🎮 Game</h2>
+
 <p id="score">Score: 0</p>
 <button onclick="increase()">Click Me</button>
 
 <hr>
 
-<h3>Play 2048</h3>
-
-<iframe src="https://play2048.co/" width="300" height="400"></iframe>
+<iframe src="https://play2048.co/" height="300"></iframe>
 
 </div>
+
 </div>
 
 </div>
 
 <footer>
-© EduInfo TN | Education Updates & Games
+© EduInfo TN | Modern Portal
 </footer>
 
 <script>
 
+// GAME
 let score=0;
-
 function increase(){
 score++;
 document.getElementById("score").innerText="Score: "+score;
 }
 
-// RSS SOURCES
-const TN_RSS="https://api.rss2json.com/v1/api.json?rss_url=https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss";
-
-const CBSE_RSS="https://api.rss2json.com/v1/api.json?rss_url=https://www.thehindu.com/education/feeder/default.rss";
-
-const EXAM_RSS="https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=education+exam+india";
-
-// LOAD NEWS FUNCTION
-function loadNews(url,elementId){
-
+// LOAD NEWS
+function loadNews(url,id){
 fetch(url)
-.then(res=>res.json())
+.then(res=>res.text())
+.then(str=>new window.DOMParser().parseFromString(str,"text/xml"))
 .then(data=>{
-
-const box=document.getElementById(elementId);
+const items=data.querySelectorAll("item");
+const box=document.getElementById(id);
 box.innerHTML="";
 
-data.items.slice(0,6).forEach(item=>{
+items.forEach((el,i)=>{
+if(i>=5)return;
 
-const a=document.createElement("article");
+const title=el.querySelector("title").textContent;
+const link=el.querySelector("link").textContent;
 
-a.innerHTML=`
+const article=document.createElement("article");
+article.innerHTML=`
 <span class="tag">Live</span>
-<h3>${item.title}</h3>
-<p>${item.description.replace(/<[^>]*>?/gm,"").slice(0,150)}...</p>
-<a href="${item.link}" target="_blank">Read more</a>
+<h4>${title}</h4>
+<a href="${link}" target="_blank">Read more</a>
 `;
 
-box.appendChild(a);
-
+box.appendChild(article);
 });
-
+})
+.catch(()=>{
+document.getElementById(id).innerHTML="Failed to load";
 });
-
 }
 
-// INITIAL LOAD
-loadNews(TN_RSS,"tn-news");
-loadNews(CBSE_RSS,"cbse-news");
-loadNews(EXAM_RSS,"exam-news");
+// SOURCES (Google News → includes BBC, TOI, Hindu, Polimer)
+loadNews("https://news.google.com/rss/search?q=tamil+nadu+education","tn-news");
+loadNews("https://news.google.com/rss/search?q=cbse+india","cbse-news");
+loadNews("https://news.google.com/rss/search?q=competitive+exam+india","exam-news");
 
-// AUTO REFRESH
+// REFRESH
 setInterval(()=>{
-
-loadNews(TN_RSS,"tn-news");
-loadNews(CBSE_RSS,"cbse-news");
-loadNews(EXAM_RSS,"exam-news");
-
+location.reload();
 },3600000);
 
 </script>
