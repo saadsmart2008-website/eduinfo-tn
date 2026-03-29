@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="google-site-verification" content="ns1DCQuBWwSoUUhUj0npJ1ePKIk3pOQDlBKLlKTQRcM" />
 
-<title>EduInfo TN | Modern Education Portal</title>
+<title>EduInfo TN | Education Portal</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EduInfo TN - TN Board, CBSE, Competitive Exams, Live News & Games">
+<meta name="description" content="EduInfo TN - TN Board, CBSE, Competitive Exams, News & Games">
 
 <style>
 body{
@@ -42,18 +43,14 @@ border-radius:12px;
 box-shadow:0 6px 20px rgba(0,0,0,.1);
 }
 
-h2{
-margin-top:0;
-}
+h2{margin-top:0}
 
 article{
 border-bottom:1px solid #eee;
 padding:10px 0;
 }
 
-article:last-child{
-border:none;
-}
+article:last-child{border:none}
 
 .tag{
 background:#e0e7ff;
@@ -69,10 +66,6 @@ color:white;
 border:none;
 border-radius:6px;
 cursor:pointer;
-}
-
-button:hover{
-background:#1d4ed8;
 }
 
 iframe{
@@ -99,7 +92,6 @@ margin-top:30px;
 </header>
 
 <div class="container">
-
 <div class="grid">
 
 <!-- TN NEWS -->
@@ -122,7 +114,7 @@ margin-top:30px;
 
 <!-- GAME -->
 <div class="card">
-<h2>🎮 Game</h2>
+<h2>🎮 Games</h2>
 
 <p id="score">Score: 0</p>
 <button onclick="increase()">Click Me</button>
@@ -131,65 +123,84 @@ margin-top:30px;
 
 <iframe src="https://play2048.co/" height="300"></iframe>
 
-</div>
+<hr>
+
+<iframe src="https://playsnake.org/" height="300"></iframe>
 
 </div>
 
+</div>
 </div>
 
 <footer>
-© EduInfo TN | Modern Portal
+© EduInfo TN | Education Portal
 </footer>
 
 <script>
 
 // GAME
-let score=0;
+let score = 0;
 function increase(){
 score++;
-document.getElementById("score").innerText="Score: "+score;
+document.getElementById("score").innerText = "Score: " + score;
 }
 
-// LOAD NEWS
+// NEWS LOADER (WORKING)
 function loadNews(url,id){
+
 fetch(url)
-.then(res=>res.text())
-.then(str=>new window.DOMParser().parseFromString(str,"text/xml"))
-.then(data=>{
-const items=data.querySelectorAll("item");
-const box=document.getElementById(id);
-box.innerHTML="";
+.then(res => res.json())
+.then(data => {
 
-items.forEach((el,i)=>{
-if(i>=5)return;
+const box = document.getElementById(id);
+box.innerHTML = "";
 
-const title=el.querySelector("title").textContent;
-const link=el.querySelector("link").textContent;
+if(!data.items){
+box.innerHTML = "No updates";
+return;
+}
 
-const article=document.createElement("article");
-article.innerHTML=`
+data.items.slice(0,5).forEach(item => {
+
+const article = document.createElement("article");
+
+article.innerHTML = `
 <span class="tag">Live</span>
-<h4>${title}</h4>
-<a href="${link}" target="_blank">Read more</a>
+<h4>${item.title}</h4>
+<a href="${item.link}" target="_blank">Read more</a>
 `;
 
 box.appendChild(article);
+
 });
+
 })
 .catch(()=>{
 document.getElementById(id).innerHTML="Failed to load";
 });
 }
 
-// SOURCES (Google News → includes BBC, TOI, Hindu, Polimer)
-loadNews("https://news.google.com/rss/search?q=tamil+nadu+education","tn-news");
-loadNews("https://news.google.com/rss/search?q=cbse+india","cbse-news");
-loadNews("https://news.google.com/rss/search?q=competitive+exam+india","exam-news");
+// SOURCES (Google News covers The Hindu, BBC, TOI, etc.)
+const TN =
+"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=tamil+nadu+education";
 
-// REFRESH
+const CBSE =
+"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=cbse+india";
+
+const EXAM =
+"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=competitive+exam+india";
+
+// LOAD
+loadNews(TN,"tn-news");
+loadNews(CBSE,"cbse-news");
+loadNews(EXAM,"exam-news");
+
+// AUTO REFRESH (every 30 mins)
 setInterval(()=>{
-location.reload();
-},3600000);
+loadNews(TN,"tn-news");
+loadNews(CBSE,"cbse-news");
+loadNews(EXAM,"exam-news");
+},1800000);
 
 </script>
 
