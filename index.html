@@ -8,7 +8,6 @@
 <title>EduInfo TN | Education Portal</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EduInfo TN - TN Board, CBSE, Competitive Exams, News & Games">
 
 <style>
 body{
@@ -49,8 +48,6 @@ article{
 border-bottom:1px solid #eee;
 padding:10px 0;
 }
-
-article:last-child{border:none}
 
 .tag{
 background:#e0e7ff;
@@ -94,25 +91,21 @@ margin-top:30px;
 <div class="container">
 <div class="grid">
 
-<!-- TN NEWS -->
 <div class="card">
 <h2>📘 TN Education</h2>
 <div id="tn-news">Loading...</div>
 </div>
 
-<!-- CBSE -->
 <div class="card">
 <h2>📗 CBSE News</h2>
 <div id="cbse-news">Loading...</div>
 </div>
 
-<!-- COMPETITIVE -->
 <div class="card">
 <h2>🎓 Competitive Exams</h2>
 <div id="exam-news">Loading...</div>
 </div>
 
-<!-- GAME -->
 <div class="card">
 <h2>🎮 Games</h2>
 
@@ -133,7 +126,7 @@ margin-top:30px;
 </div>
 
 <footer>
-© EduInfo TN | Education Portal
+© EduInfo TN | Live Education Portal
 </footer>
 
 <script>
@@ -145,29 +138,32 @@ score++;
 document.getElementById("score").innerText = "Score: " + score;
 }
 
-// NEWS LOADER (WORKING)
-function loadNews(url,id){
+// WORKING NEWS LOADER (NO FAIL)
+function loadNews(rssUrl, id){
 
-fetch(url)
-.then(res => res.json())
+const api = "https://api.allorigins.win/raw?url=" + encodeURIComponent(rssUrl);
+
+fetch(api)
+.then(res => res.text())
+.then(str => new DOMParser().parseFromString(str, "text/xml"))
 .then(data => {
 
+const items = data.querySelectorAll("item");
 const box = document.getElementById(id);
 box.innerHTML = "";
 
-if(!data.items){
-box.innerHTML = "No updates";
-return;
-}
+items.forEach((el, i) => {
+if(i >= 5) return;
 
-data.items.slice(0,5).forEach(item => {
+const title = el.querySelector("title").textContent;
+const link = el.querySelector("link").textContent;
 
 const article = document.createElement("article");
 
 article.innerHTML = `
 <span class="tag">Live</span>
-<h4>${item.title}</h4>
-<a href="${item.link}" target="_blank">Read more</a>
+<h4>${title}</h4>
+<a href="${link}" target="_blank">Read more</a>
 `;
 
 box.appendChild(article);
@@ -176,30 +172,21 @@ box.appendChild(article);
 
 })
 .catch(()=>{
-document.getElementById(id).innerHTML="Failed to load";
+document.getElementById(id).innerHTML = "News unavailable";
 });
+
 }
 
-// SOURCES (Google News covers The Hindu, BBC, TOI, etc.)
-const TN =
-"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=tamil+nadu+education";
+// SOURCES
+loadNews("https://news.google.com/rss/search?q=tamil+nadu+education", "tn-news");
+loadNews("https://news.google.com/rss/search?q=cbse+india", "cbse-news");
+loadNews("https://news.google.com/rss/search?q=competitive+exam+india", "exam-news");
 
-const CBSE =
-"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=cbse+india";
-
-const EXAM =
-"https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=competitive+exam+india";
-
-// LOAD
-loadNews(TN,"tn-news");
-loadNews(CBSE,"cbse-news");
-loadNews(EXAM,"exam-news");
-
-// AUTO REFRESH (every 30 mins)
+// AUTO UPDATE
 setInterval(()=>{
-loadNews(TN,"tn-news");
-loadNews(CBSE,"cbse-news");
-loadNews(EXAM,"exam-news");
+loadNews("https://news.google.com/rss/search?q=tamil+nadu+education", "tn-news");
+loadNews("https://news.google.com/rss/search?q=cbse+india", "cbse-news");
+loadNews("https://news.google.com/rss/search?q=competitive+exam+india", "exam-news");
 },1800000);
 
 </script>
