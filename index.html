@@ -2,299 +2,317 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- GOOGLE VERIFICATION -->
-<meta name="google-site-verification" content="ns1DCQuBWwSoUUhUj0npJ1ePKIk3pOQDlBKLlKTQRcM" />
-
-<title>EduInfo TN | Tamil Nadu Student Information Portal</title>
-
-<meta name="description" content="EduInfo TN is a trusted student portal for Tamil Nadu Board, CBSE, Competitive Exams, Scholarships, Results, Jobs, Games and Career Guidance.">
-
-<meta name="keywords" content="EduInfo TN, TN Board, CBSE, JEE, NEET, UPSC, TNPSC, Scholarships, Results, Tamil Nadu education news">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="ns1DCQuBWwSoUUhUj0npJ1ePKIk3pOQDlBKLlKTQRcM">
+<title>EduInfo TN | Education headlines for Tamil Nadu students</title>
+<meta name="description" content="Education headlines for Tamil Nadu students from The Hindu, The Times of India, BBC and Polimer News: board results, exams, scholarships and careers.">
 <meta name="robots" content="index, follow">
-
+<meta property="og:title" content="EduInfo TN">
+<meta property="og:description" content="Education headlines for Tamil Nadu students, from trusted news sources.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+:root{
+  --paper:#f2f5f3;
+  --card:#ffffff;
+  --ink:#14211f;
+  --muted:#4d5f5b;
+  --line:#d3dcd8;
+  --teal:#0f6b5c;
+  --teal-dark:#0a4d42;
+  --turmeric:#e8a317;
+  --brick:#b23a2b;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI","Noto Sans Tamil",system-ui,-apple-system,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+a{color:var(--teal-dark)}
+:focus-visible{outline:3px solid var(--turmeric);outline-offset:2px}
 
-body{
-font-family:Arial, sans-serif;
-background:#f8fafc;
-color:#111827;
-line-height:1.6;
-}
+header{background:var(--teal-dark);color:#fff;padding:28px 20px 22px;border-bottom:6px solid var(--turmeric)}
+.wrap{max-width:900px;margin:0 auto}
+header h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,6vw,46px);line-height:1.1;margin-bottom:8px}
+header p{max-width:60ch;color:#d6ebe6;font-size:17px}
 
-header{
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#06b6d4);
-color:white;
-padding:30px 20px;
-text-align:center;
-box-shadow:0 4px 20px rgba(0,0,0,0.15);
-}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+nav .wrap{display:flex;flex-wrap:wrap;gap:4px 18px;padding:10px 20px}
+nav a{text-decoration:none;font-weight:600;font-size:15px;padding:4px 0;color:var(--ink)}
+nav a:hover{color:var(--teal)}
 
-header h1{
-font-size:38px;
-margin-bottom:8px;
-}
+main{padding:28px 20px 10px}
+section{margin-bottom:44px;scroll-margin-top:70px}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:28px;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:16px;max-width:65ch}
 
-header p{
-font-size:18px;
-opacity:0.95;
-}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.filters button{background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:6px;padding:7px 14px;font-size:15px;font-weight:600;cursor:pointer;margin:0}
+.filters button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.filters.src button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
 
-nav{
-background:#111827;
-padding:12px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:999;
-}
+#status{font-size:14px;color:var(--muted);margin:10px 0}
+#status .fail{color:var(--brick)}
 
-nav a{
-color:white;
-text-decoration:none;
-margin:0 15px;
-font-weight:bold;
-font-size:15px;
-}
+.feed{list-style:none;border-top:1px solid var(--line)}
+.feed li{padding:14px 0;border-bottom:1px solid var(--line)}
+.feed a{font-size:18px;font-weight:600;text-decoration:none;color:var(--ink);display:block;max-width:70ch}
+.feed a:hover{color:var(--teal);text-decoration:underline}
+.meta{font-size:13px;color:var(--muted);margin-top:3px}
+.meta b{color:var(--teal-dark)}
+.empty{padding:18px 0;color:var(--muted)}
 
-nav a:hover{
-color:#38bdf8;
-}
+.sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px}
+.source{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:6px;padding:14px 16px}
+.source:nth-child(2){border-left-color:var(--turmeric)}
+.source:nth-child(3){border-left-color:var(--brick)}
+.source:nth-child(4){border-left-color:var(--ink)}
+.source h3{font-size:18px;margin-bottom:2px}
+.source p{font-size:14px;color:var(--muted);margin-bottom:8px}
+.source a{font-weight:600}
 
-.hero{
-padding:50px 20px;
-text-align:center;
-background:white;
-}
+.game{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px;max-width:420px}
+.game p{margin-bottom:8px}
+#tap{background:var(--teal);color:#fff;border:none;border-radius:6px;padding:14px 22px;font-size:18px;font-weight:700;cursor:pointer}
+#tap:hover{background:var(--teal-dark)}
+#tap:disabled{background:#8aa39d;cursor:default}
+.game .big{font-size:36px;font-weight:700;font-family:Georgia,serif}
 
-.hero h2{
-font-size:34px;
-margin-bottom:10px;
-color:#1e293b;
-}
+footer{background:var(--ink);color:#c5d2ce;padding:24px 20px;font-size:14px}
+footer p{max-width:70ch;margin-bottom:6px}
+footer a{color:#fff}
 
-.hero p{
-max-width:800px;
-margin:auto;
-font-size:18px;
-color:#475569;
-}
-
-.container{
-max-width:1300px;
-margin:auto;
-padding:25px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:22px;
-}
-
-.card{
-background:white;
-border-radius:16px;
-padding:22px;
-box-shadow:0 8px 22px rgba(0,0,0,0.08);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card h3{
-margin-bottom:14px;
-color:#1d4ed8;
-font-size:24px;
-}
-
-.card ul{
-padding-left:18px;
-}
-
-.card li{
-margin-bottom:8px;
-}
-
-.badge{
-display:inline-block;
-background:#dbeafe;
-color:#1d4ed8;
-padding:4px 10px;
-border-radius:20px;
-font-size:13px;
-margin-bottom:10px;
-}
-
-.gamebox{
-text-align:center;
-}
-
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-margin-top:10px;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-iframe{
-width:100%;
-height:300px;
-border:none;
-border-radius:12px;
-margin-top:15px;
-}
-
-footer{
-margin-top:40px;
-background:#111827;
-color:white;
-text-align:center;
-padding:25px;
-}
-
-footer p{
-opacity:0.85;
-}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>EduInfo TN</h1>
-<p>No.1 Tamil Nadu Student Information Portal</p>
+  <div class="wrap">
+    <h1>EduInfo TN</h1>
+    <p>Education headlines for Tamil Nadu students: results, exams, scholarships and careers, from four news sources only.</p>
+  </div>
 </header>
 
-<nav>
-<a href="#news">News</a>
-<a href="#education">Education</a>
-<a href="#exams">Exams</a>
-<a href="#scholarships">Scholarships</a>
-<a href="#games">Games</a>
-<a href="#career">Career</a>
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#headlines">Headlines</a>
+    <a href="#sources">Sources</a>
+    <a href="#games">Game</a>
+  </div>
 </nav>
 
-<section class="hero">
-<h2>Trusted Information Portal for Students & Young People</h2>
-<p>Live education updates, TN Board alerts, CBSE news, Competitive Exams, Scholarships, Jobs, Results, Games and Career Guidance.</p>
-</section>
+<main class="wrap">
 
-<div class="container">
+  <section id="headlines">
+    <h2>Latest education headlines</h2>
+    <p class="sub">Headlines load from the publishers' own education feeds. Tap a headline to read the full story on the publisher's site.</p>
 
-<div class="grid">
+    <div class="filters" id="topics" role="group" aria-label="Filter by topic">
+      <button type="button" data-topic="all" aria-pressed="true">All</button>
+      <button type="button" data-topic="results" aria-pressed="false">Results &amp; boards</button>
+      <button type="button" data-topic="exams" aria-pressed="false">Exams</button>
+      <button type="button" data-topic="scholarships" aria-pressed="false">Scholarships</button>
+      <button type="button" data-topic="careers" aria-pressed="false">Careers &amp; admissions</button>
+    </div>
+    <div class="filters src" id="srcs" role="group" aria-label="Filter by source">
+      <button type="button" data-src="all" aria-pressed="true">All sources</button>
+      <button type="button" data-src="The Hindu" aria-pressed="false">The Hindu</button>
+      <button type="button" data-src="Times of India" aria-pressed="false">Times of India</button>
+      <button type="button" data-src="BBC" aria-pressed="false">BBC</button>
+    </div>
 
-<!-- LIVE NEWS -->
-<div class="card" id="news">
-<span class="badge">LIVE SOURCES</span>
-<h3>Latest News</h3>
-<ul>
-<li>The Hindu Education Updates</li>
-<li>BBC Student News</li>
-<li>The Times of India Education</li>
-<li>Polimer Tamil Updates</li>
-<li>Google Search Visibility Ready</li>
-</ul>
-</div>
+    <p id="status" role="status">Loading headlines...</p>
+    <ul class="feed" id="feed"></ul>
+  </section>
 
-<!-- EDUCATION -->
-<div class="card" id="education">
-<span class="badge">EDUCATION</span>
-<h3>Education Updates</h3>
-<ul>
-<li>Tamil Nadu Board Updates</li>
-<li>CBSE Circulars</li>
-<li>Results & Timetables</li>
-<li>College Admissions</li>
-<li>School Notifications</li>
-</ul>
-</div>
+  <section id="sources">
+    <h2>Our sources</h2>
+    <p class="sub">EduInfo TN only shows or links to these four publishers. We do not write or edit the news.</p>
+    <div class="sources">
+      <div class="source">
+        <h3>The Hindu</h3>
+        <p>Education section</p>
+        <a href="https://www.thehindu.com/education/" target="_blank" rel="noopener">Open education news</a>
+      </div>
+      <div class="source">
+        <h3>The Times of India</h3>
+        <p>Education section</p>
+        <a href="https://timesofindia.indiatimes.com/home/education" target="_blank" rel="noopener">Open education news</a>
+      </div>
+      <div class="source">
+        <h3>BBC</h3>
+        <p>Education news</p>
+        <a href="https://www.bbc.com/news/education" target="_blank" rel="noopener">Open education news</a>
+      </div>
+      <div class="source">
+        <h3>Polimer News</h3>
+        <p>Tamil news channel</p>
+        <a href="https://www.polimernews.com" target="_blank" rel="noopener">Open Polimer News</a>
+      </div>
+    </div>
+  </section>
 
-<!-- EXAMS -->
-<div class="card" id="exams">
-<span class="badge">COMPETITIVE EXAMS</span>
-<h3>Exam Section</h3>
-<ul>
-<li>JEE Main</li>
-<li>NEET</li>
-<li>UPSC</li>
-<li>TNPSC</li>
-<li>Government Job Notifications</li>
-</ul>
-</div>
+  <section id="games">
+    <h2>Take a break</h2>
+    <p class="sub">How many times can you tap in 10 seconds?</p>
+    <div class="game">
+      <p>Taps: <span class="big" id="taps">0</span></p>
+      <p id="timeLeft">Press start to begin.</p>
+      <p>Best: <strong id="best">0</strong></p>
+      <button type="button" id="tap">Start</button>
+    </div>
+  </section>
 
-<!-- SCHOLARSHIP -->
-<div class="card" id="scholarships">
-<span class="badge">FINANCIAL HELP</span>
-<h3>Scholarships</h3>
-<ul>
-<li>TN Govt Scholarships</li>
-<li>Minority Scholarships</li>
-<li>Merit Scholarships</li>
-<li>Private Grants</li>
-<li>College Fee Aid</li>
-</ul>
-</div>
-
-<!-- GAMES -->
-<div class="card gamebox" id="games">
-<span class="badge">STUDENT GAMES</span>
-<h3>Fun Zone</h3>
-
-<p id="score">Score: 0</p>
-<button onclick="increase()">Click Game</button>
-
-<iframe src="https://play2048.co/"></iframe>
-
-<iframe src="https://playsnake.org/"></iframe>
-
-</div>
-
-<!-- CAREER -->
-<div class="card" id="career">
-<span class="badge">CAREER</span>
-<h3>Career Guidance</h3>
-<ul>
-<li>Engineering Paths</li>
-<li>Medical Careers</li>
-<li>Govt Jobs</li>
-<li>IT & AI Careers</li>
-<li>Study Abroad Basics</li>
-</ul>
-</div>
-
-</div>
-</div>
+</main>
 
 <footer>
-<p>© EduInfo TN | Built for Students • Future Brand of Tamil Nadu</p>
+  <div class="wrap">
+    <p>&copy; EduInfo TN. Headlines and trademarks belong to their publishers: The Hindu, The Times of India, BBC and Polimer News. EduInfo TN is not affiliated with them.</p>
+    <p>For admissions, results and exam dates, always confirm on the official board or exam website.</p>
+  </div>
 </footer>
 
 <script>
-let score=0;
+(function(){
+  var FEEDS = [
+    {name:"The Hindu", url:"https://www.thehindu.com/education/feeder/default.rss", home:"https://www.thehindu.com/education/"},
+    {name:"Times of India", url:"https://timesofindia.indiatimes.com/rssfeeds/913168846.cms", home:"https://timesofindia.indiatimes.com/home/education"},
+    {name:"BBC", url:"https://feeds.bbci.co.uk/news/education/rss.xml", home:"https://www.bbc.com/news/education"}
+  ];
+  var TOPICS = {
+    results: /result|board|cbse|sslc|hsc|plus two|class 1[02]|marks|topper|timetable/i,
+    exams: /exam|neet|jee|upsc|tnpsc|cuet|gate|test|hall ticket|admit card/i,
+    scholarships: /scholarship|fellowship|stipend|fee waiver|grant/i,
+    careers: /career|job|recruit|admission|counselling|placement|college|university|course|vacanc/i
+  };
+  var items = [], failed = [], topic = "all", src = "all";
+  var feedEl = document.getElementById("feed");
+  var statusEl = document.getElementById("status");
 
-function increase(){
-score++;
-document.getElementById("score").innerText="Score: "+score;
-}
+  function fmt(d){
+    if(!d || isNaN(d)) return "";
+    return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+  }
+
+  function render(){
+    var list = items.filter(function(it){
+      if(src !== "all" && it.source !== src) return false;
+      if(topic !== "all" && !TOPICS[topic].test(it.title + " " + it.desc)) return false;
+      return true;
+    });
+    feedEl.textContent = "";
+    if(!list.length){
+      var e = document.createElement("li");
+      e.className = "empty";
+      e.textContent = items.length ? "No headlines match this filter right now. Try All." : "No headlines to show yet.";
+      feedEl.appendChild(e);
+    }
+    list.slice(0,40).forEach(function(it){
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = it.link; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = it.title;
+      var m = document.createElement("div");
+      m.className = "meta";
+      var b = document.createElement("b");
+      b.textContent = it.source;
+      m.appendChild(b);
+      var ds = fmt(it.date);
+      if(ds) m.appendChild(document.createTextNode(" \u2022 " + ds));
+      li.appendChild(a); li.appendChild(m);
+      feedEl.appendChild(li);
+    });
+  }
+
+  function setStatus(done){
+    statusEl.textContent = "";
+    if(!done){ statusEl.textContent = "Loading headlines..."; return; }
+    statusEl.appendChild(document.createTextNode("Showing latest headlines. "));
+    failed.forEach(function(f){
+      var s = document.createElement("span");
+      s.className = "fail";
+      s.appendChild(document.createTextNode(f.name + " could not load. "));
+      var a = document.createElement("a");
+      a.href = f.home; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = "Open " + f.name + " directly.";
+      s.appendChild(a);
+      s.appendChild(document.createTextNode(" "));
+      statusEl.appendChild(s);
+    });
+  }
+
+  function load(feed){
+    var api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feed.url);
+    var ctl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = setTimeout(function(){ if(ctl) ctl.abort(); }, 12000);
+    return fetch(api, ctl ? {signal:ctl.signal} : {})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        clearTimeout(timer);
+        if(d.status !== "ok" || !d.items) throw new Error("bad feed");
+        d.items.forEach(function(x){
+          var tmp = document.createElement("div");
+          tmp.innerHTML = x.description || "";
+          items.push({
+            title: x.title,
+            link: x.link,
+            desc: (tmp.textContent || "").slice(0,300),
+            date: new Date((x.pubDate || "").replace(" ","T") + (x.pubDate && x.pubDate.indexOf("T")<0 ? "Z" : "")),
+            source: feed.name
+          });
+        });
+      })
+      .catch(function(){ clearTimeout(timer); failed.push(feed); });
+  }
+
+  Promise.all(FEEDS.map(load)).then(function(){
+    items.sort(function(a,b){ return (b.date||0) - (a.date||0); });
+    setStatus(true);
+    render();
+  });
+
+  function wire(id, attr, setter){
+    var box = document.getElementById(id);
+    box.addEventListener("click", function(ev){
+      var btn = ev.target.closest("button");
+      if(!btn) return;
+      box.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+      setter(btn.getAttribute(attr));
+      render();
+    });
+  }
+  wire("topics","data-topic",function(v){ topic = v; });
+  wire("srcs","data-src",function(v){ src = v; });
+
+  /* Tap game */
+  var taps = 0, best = 0, running = false, t = 0, iv;
+  var btn = document.getElementById("tap");
+  var tapsEl = document.getElementById("taps");
+  var timeEl = document.getElementById("timeLeft");
+  var bestEl = document.getElementById("best");
+  btn.addEventListener("click", function(){
+    if(!running){
+      running = true; taps = 1; t = 10;
+      tapsEl.textContent = taps;
+      btn.textContent = "Tap!";
+      timeEl.textContent = "Time left: 10s";
+      iv = setInterval(function(){
+        t--;
+        timeEl.textContent = "Time left: " + t + "s";
+        if(t <= 0){
+          clearInterval(iv); running = false;
+          if(taps > best){ best = taps; bestEl.textContent = best; }
+          timeEl.textContent = "Time's up. You tapped " + taps + " times.";
+          btn.textContent = "Play again";
+          btn.disabled = true;
+          setTimeout(function(){ btn.disabled = false; }, 800);
+        }
+      }, 1000);
+    } else {
+      taps++; tapsEl.textContent = taps;
+    }
+  });
+})();
 </script>
 
 </body>
-</html>
+      </html>
